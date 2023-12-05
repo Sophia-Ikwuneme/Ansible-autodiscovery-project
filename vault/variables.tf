@@ -26,16 +26,16 @@ variable "port_https" {
   default = 443
 }
 variable "vault-ami" {
-  default = "ami-00983e8a26e4c9bd9"
+  default = ""
 }
 variable "instance_type" {
   default = "t3.medium"
 }
 variable "domain_name" {
-  default = "greatminds.sbs"
+  default = "sophieplace.com"
 }
 variable "email" {
-  default = "gm@gmail.com"
+  default = "amibaby104@gmail.com"
 }
 variable "api_key" {
   default = ""

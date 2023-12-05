@@ -3,7 +3,7 @@ locals {
 }
 provider "vault" {
   token   = "s.4ivqHgNgPct1pSSWKW4ZCRFs"
-  address = "https://greatminds.sbs"
+  address = "https://sophieplace.com"
 }
 
 module "vpc" {
@@ -127,7 +127,7 @@ module "bastion" {
 
 module "nexus" {
   source           = "./module/nexus_server"
-  redhat_ami       = "ami-0d767e966f3458eb5"
+  redhat_ami       = ""
   instance_type_t2 = "t2.medium"
   nexus_sg         = [module.vpc.nexus-sg]
   subnet_id        = module.vpc.pubsub01-id
@@ -188,17 +188,17 @@ module "prod-lb" {
 
 module "route53" {
   source            = "./module/route53"
-  domain-name       = "greatminds.sbs"
-  domain-name1      = "stage.greatminds.sbs"
+  domain-name       = "sophieplace.com"
+  domain-name1      = "stage.sophieplace.com"
   stage_lb_dns_name = module.stage-lb.stage-alb-dns
   stage_lb_zoneid   = module.stage-lb.stage-alb-zone-id
-  domain-name2      = "prod.greatminds.sbs"
+  domain-name2      = "prod.sophieplace.com"
   prod_lb_dns_name  = module.prod-lb.prod-alb-dns
   prod_lb_zoneid    = module.prod-lb.prod-alb-zone-id
 }
 
 module "acm" {
   source       = "./module/acm"
-  domain_name  = "greatminds.sbs"
-  domain_name2 = "*.greatminds.sbs"
+  domain_name  = "sophieplace.com"
+  domain_name2 = "*.sophieplace.com"
 }
