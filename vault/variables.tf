@@ -1,9 +1,10 @@
 variable "aws_region" {
-  default = "eu-west-3"
+  default = "eu-west-2"
 }
 variable "profile" {
-  default = "Groupaccess"
+  default = "euteam-2"
 }
+
 variable "keypair_name" {
   default = "vault"
 }
@@ -26,7 +27,7 @@ variable "port_https" {
   default = 443
 }
 variable "vault-ami" {
-  default = ""
+  default = "ami-08c3913593117726b"
 }
 variable "instance_type" {
   default = "t3.medium"
@@ -38,8 +39,8 @@ variable "email" {
   default = "amibaby104@gmail.com"
 }
 variable "api_key" {
-  default = ""
+  default = "NRAK-46MTY3S6FXLGNX01GYBU09E62VO "
 }
 variable "account_id" {
-  default = ""
+  default = "4268773"
 }

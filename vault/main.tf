@@ -9,7 +9,7 @@ provider "aws" {
 }
 
 # Security Group for vault Server
-resource "aws_security_group" "vault_sg-6" {
+resource "aws_security_group" "vault-sg" {
   name        = "vault"
   description = "Allow inbound traffic"
   
@@ -61,7 +61,7 @@ resource "aws_security_group" "vault_sg-6" {
 resource "aws_instance" "vault-server" {
   ami                         = var.vault-ami
   instance_type               = var.instance_type
-  vpc_security_group_ids      = [aws_security_group.vault_sg-6.id]
+  vpc_security_group_ids      = [aws_security_group.vault-sg.id]
   associate_public_ip_address = true
   key_name                    = aws_key_pair.vault_key_pair.key_name
   iam_instance_profile        = aws_iam_instance_profile.vault-kms-unseal.id
