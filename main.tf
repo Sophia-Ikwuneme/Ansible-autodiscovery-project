@@ -1,8 +1,8 @@
 locals {
-  name = "pacaadpet"
+  name = "autodiscovery"
 }
 provider "vault" {
-  token   = "s.4ivqHgNgPct1pSSWKW4ZCRFs"
+  token   = "s.23rlbw1rYxA8AUoEW22uHXUP"
   address = "https://sophieplace.com"
 }
 
@@ -11,10 +11,10 @@ module "vpc" {
   vpc-cidr                = "10.0.0.0/16"
   tag-vpc                 = "${local.name}-vpc"
   pubsub01-cidr           = "10.0.1.0/24"
-  az1                     = "eu-west-3a"
+  az1                     = "eu-west-2a"
   tag-pubsub01            = "${local.name}-pubsub01"
   pubsub02-cidr           = "10.0.2.0/24"
-  az2                     = "eu-west-3b"
+  az2                     = "eu-west-2b"
   tag-pubsub02            = "${local.name}-pubsub02"
   prvtsub01-cidr          = "10.0.3.0/24"
   tag-prvtsub01           = "${local.name}-prvtsub01"
@@ -45,7 +45,7 @@ module "vpc" {
 
 module "jenkins" {
   source                = "./module/jenkins"
-  ami                   = "ami-0d767e966f3458eb5"
+  ami                   = "ami-08c3913593117726b"
   instance_type         = "t2.medium"
   prt_subnet            = module.vpc.prvtsub01
   security_group        = [module.vpc.Jenkins_SG.id]
@@ -54,13 +54,13 @@ module "jenkins" {
   jenkins-elb           = "${local.name}-jenkins-elb"
   subnet-id             = [module.vpc.pubsub01-id]
   nexus-ip              = module.nexus.nexus_ip
-  newrelic-user-licence = "NRAK-81D5A0VU3I67CXWHC7ENSQE45IK"
-  newrelic-acct-id      = "4091023"
+  newrelic-user-licence = "NRAK-46MTY3S6FXLGNX01GYBU09E62VO"
+  newrelic-acct-id      = "4268773"
 }
 
 module "asg-stage" {
   source              = "./module/asg-stage"
-  ami-redhat-id       = "ami-0d767e966f3458eb5"
+  ami-redhat-id       = "ami-08c3913593117726b"
   instance_type       = "t2.medium"
   stage-lt-sg         = [module.vpc.docker-sg]
   keypair_name        = module.vpc.keypairid
@@ -69,13 +69,13 @@ module "asg-stage" {
   stage-asg-name        = "stage-asg"
   asg-policy            = "asg-policy"
   nexus-ip              = module.nexus.nexus_ip
-  newrelic-user-licence = "NRAK-81D5A0VU3I67CXWHC7ENSQE45IK"
-  newrelic-acct-id      = "4091023"
+  newrelic-user-licence = "NRAK-46MTY3S6FXLGNX01GYBU09E62VO"
+  newrelic-acct-id      = "4268773"
 }
 
 module "asg-prod" {
   source              = "./module/asg-prod"
-  ami-redhat-id       = "ami-0d767e966f3458eb5"
+  ami-redhat-id       = "ami-08c3913593117726b"
   instance_type       = "t2.medium"
   prod-lt-sg          = [module.vpc.docker-sg]
   keypair_name        = module.vpc.keypairid
@@ -84,13 +84,13 @@ module "asg-prod" {
   prod-asg-name         = "prod-asg"
   asg-policy            = "asg-policy"
   nexus-ip              = module.nexus.nexus_ip
-  newrelic-user-licence = "NRAK-81D5A0VU3I67CXWHC7ENSQE45IK"
-  newrelic-acct-id      = "4091023"
+  newrelic-user-licence = "NRAK-46MTY3S6FXLGNX01GYBU09E62VO"
+  newrelic-acct-id      = "4268773"
 }
 
 module "sonarqube" {
   source           = "./module/sonarqube"
-  ami_ubuntu       = "ami-00983e8a26e4c9bd9"
+  ami_ubuntu       = "ami-08c3913593117726b"
   instance_type    = "t2.medium"
   key_name         = module.vpc.keypairid
   sonarqube-sg     = module.vpc.sonarqube-sg
@@ -100,7 +100,7 @@ module "sonarqube" {
 
 module "ansible" {
   source             = "./module/ansible"
-  ami_redhat         = "ami-0d767e966f3458eb5"
+  ami_redhat         = "ami-08c3913593117726b"
   instance_type      = "t2.medium"
   subnet_id          = module.vpc.pubsub02-id
   bastion-ansible-sg = module.vpc.bastion-ansible-sg
@@ -116,7 +116,7 @@ module "ansible" {
 
 module "bastion" {
   source               = "./module/bastion"
-  ami_redhat           = "ami-0d767e966f3458eb5"
+  ami_redhat           = "ami-08c3913593117726b"
   instance_type        = "t2.micro"
   subnet_id            = module.vpc.pubsub02-id
   bastion-ansible-sg   = module.vpc.bastion-ansible-sg
@@ -127,14 +127,14 @@ module "bastion" {
 
 module "nexus" {
   source           = "./module/nexus_server"
-  redhat_ami       = ""
+  redhat_ami       = "ami-08c3913593117726b"
   instance_type_t2 = "t2.medium"
   nexus_sg         = [module.vpc.nexus-sg]
   subnet_id        = module.vpc.pubsub01-id
   key_name         = module.vpc.keypairid
   nexus_name       = "${local.name}-nexus"
-  api_key          = ""
-  account_id       = ""
+  api_key          = "NRAK-46MTY3S6FXLGNX01GYBU09E62VO"
+  account_id       = "4268773"
 }
 
 data "vault_generic_secret" "mydb_secret" {
@@ -144,7 +144,7 @@ data "vault_generic_secret" "mydb_secret" {
 
 module "database" {
   source               = "./module/database"
-  db_name              = "acaadpetdb"
+  db_name              = "sophieplace"
   engine               = "mysql"
   db-sg-name           = "${local.name}-db-sg"
   instance_type        = "db.t3.micro"

@@ -1,4 +1,4 @@
 provider "aws" {
-  region  = "eu-west-3"
-  profile = "Groupaccess"
+  region  = "eu-west-2"
+  profile = "euteam-2"
 }
