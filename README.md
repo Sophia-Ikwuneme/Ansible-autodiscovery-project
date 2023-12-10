@@ -4,3 +4,6 @@ Aligned with contemporary DevOps best practices, the project places a strong emp
 
 The architectural diagram below provides a detailed breakdown of the project's structure, highlighting its intricate components and how they interact within the AWS environment.
 ![Untitled (3)](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/1e60e1c3-7e7e-479d-9c14-fd338ceca41e)
+In this project, a Jenkinsfile has been utilized to precisely articulate each stage of our continuous integration/continuous delivery (CI/CD) pipeline. This Jenkinsfile serves as a comprehensive blueprint, explicitly delineating the various phases and steps involved in the automated workflow.
+Below are the steps taking in deploying this project 
+Step 1
