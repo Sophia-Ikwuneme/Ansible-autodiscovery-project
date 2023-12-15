@@ -69,12 +69,15 @@ terraform apply
 
 Step 9: SSH into Bastion Host
 SSH into the Bastion host to access Jenkins.
+
 bash
 ssh ec2-user@<bastion-ip>
 
 Step 10: SSH into Jenkins
+
 bash 
 ssh ec2-user@<jenkins-ip>
+
 next we need to cat the part giving on out jenkins to be able to get our password 
 ![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/b739661e-2ff4-4734-9474-de07ee2c75aa)
 ![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/151ee478-9cdd-41e6-94c7-844427af7585)
