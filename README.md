@@ -13,6 +13,7 @@ The architectural diagram provides a detailed breakdown of the project's structu
 Jenkinsfile
 
 The Jenkinsfile serves as a comprehensive blueprint, precisely defining each stage of the continuous integration/continuous delivery (CI/CD) pipeline. This file outlines the various phases and steps involved in the automated workflow, providing clarity and transparency.
+
 Deployment Steps
 
 Step 1: Vault Initialization and Application
