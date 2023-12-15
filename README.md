@@ -17,47 +17,66 @@ Deployment Steps
 
 Step 1: Vault Initialization and Application
 Navigate to the vault initialization directory and apply the necessary configurations.
+
+
 bash
 cd vault
 terraform init
 terraform apply
 
+
 Step 2: SSH into Ubuntu Server
 SSH into the Ubuntu server using the provided IP address.
+
 bash
 ssh ubuntu@<your-ip-address>
 
+
 Step 3: Initialize Vault Server
 Initialize the Vault server.
+
 bash
 vault operator init
+
 Step 4: Copy New Token
 Copy the newly generated token and edit the root provider.tf file.
+
 Step 5: Log into Vault Server
 Log into the Vault server using the generated token.
+
 bash
 Copy code
 vault login <your-generated-token>
+
 Step 6: Enable Key-Value (KV) Secrets Engine
 Enable the KV secrets engine at the specified path (secret).
+
 bash
 Copy code
 vault secrets enable -path=secret kv
+
 Step 7: Set Values in Vault
 Set values for the keys 'username' and 'password' in the 'secret/database' path in Vault.
+
 bash
 Copy code
 vault kv put secret/database username=admin password=admin123
+
 Step 8: Initialize and Apply Modules
 Open a new terminal and initialize and apply the Terraform modules.
+
 bash
 terraform init
 terraform apply
+
 Step 9: SSH into Bastion Host
 SSH into the Bastion host to access Jenkins.
+
 bash
 ssh ec2-user@<bastion-ip>
+
 Step 10: SSH into Jenkins
+
 bash 
 ssh ec2-user@<jenkins-ip>
 next we need to cat the part giving on out jenkins to be able to get our password 
