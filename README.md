@@ -16,9 +16,8 @@ The Jenkinsfile serves as a comprehensive blueprint, precisely defining each sta
 
 Deployment Steps
 
-Step 1: Vault Initialization and Application
-Navigate to the vault initialization directory and apply the necessary configurations.
 
+Step 1: Vault Initialization and Application
 
 bash
 cd vault
@@ -34,7 +33,6 @@ ssh ubuntu@<your-ip-address>
 
 
 Step 3: Initialize Vault Server
-Initialize the Vault server.
 
 bash
 vault operator init
@@ -57,27 +55,24 @@ Copy code
 vault secrets enable -path=secret kv
 
 Step 7: Set Values in Vault
-Set values for the keys 'username' and 'password' in the 'secret/database' path in Vault.
 
 bash
 Copy code
 vault kv put secret/database username=admin password=admin123
 
 Step 8: Initialize and Apply Modules
-Open a new terminal and initialize and apply the Terraform modules.
 
+Open a new terminal and initialize and apply the Terraform modules.
 bash
 terraform init
 terraform apply
 
 Step 9: SSH into Bastion Host
 SSH into the Bastion host to access Jenkins.
-
 bash
 ssh ec2-user@<bastion-ip>
 
 Step 10: SSH into Jenkins
-
 bash 
 ssh ec2-user@<jenkins-ip>
 next we need to cat the part giving on out jenkins to be able to get our password 
