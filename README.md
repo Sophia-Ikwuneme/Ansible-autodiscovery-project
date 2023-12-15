@@ -6,7 +6,7 @@ Aligned with contemporary DevOps best practices, the project places a significan
 
 Architectural Diagram
 
-The architectural diagram provides a detailed breakdown of the project's structure, elucidating its intricate components and their interactions within the AWS environmen
+The architectural diagram provides a detailed breakdown of the project's structure, elucidating its intricate components and their interactions within the AWS environment
 
 ![Untitled (3)](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/1e60e1c3-7e7e-479d-9c14-fd338ceca41e)
 
