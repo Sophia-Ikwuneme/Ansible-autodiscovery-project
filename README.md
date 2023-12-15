@@ -1,36 +1,65 @@
-This Java enterprise project is designed to operate within a highly available and scalable AWS infrastructure. At its core, the project leverages Bash scripting as a crucial tool for seamlessly incorporating private IP addresses into our Ansible inventory file. This dynamic process ensures the automatic inclusion of newly provisioned instances from our Auto Scaling Group.
+Anisble-Auto-Discovery
 
-Aligned with contemporary DevOps best practices, the project places a strong emphasis on automation, scalability, high availability, and resilience. It facilitates collaborative management, allowing both developers and operators to streamline and enhance the entire lifecycle of the Java application. From the initial development phase to deployment, the project harnesses the robust capabilities of AWS infrastructure.
+The Java enterprise project described herein is meticulously crafted to operate seamlessly within an AWS infrastructure designed for high availability and scalability. The project strategically employs Bash scripting as an integral tool, facilitating the smooth integration of private IP addresses into the Ansible inventory file. This dynamic process ensures the automatic inclusion of newly provisioned instances originating from our Auto Scaling Group.
 
-The architectural diagram below provides a detailed breakdown of the project's structure, highlighting its intricate components and how they interact within the AWS environment.
+Aligned with contemporary DevOps best practices, the project places a significant emphasis on key pillars such as automation, scalability, high availability, and resilience. This comprehensive approach enables collaborative management, empowering both developers and operators to streamline and enhance the entire lifecycle of the Java application, from its developmental phase to deployment. The project harnesses the robust capabilities of AWS infrastructure to achieve optimal results.
+
+Architectural Diagram
+
+The architectural diagram provides a detailed breakdown of the project's structure, elucidating its intricate components and their interactions within the AWS environmen
+
 ![Untitled (3)](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/1e60e1c3-7e7e-479d-9c14-fd338ceca41e)
-In this project, a Jenkinsfile has been utilized to precisely articulate each stage of our continuous integration/continuous delivery (CI/CD) pipeline. This Jenkinsfile serves as a comprehensive blueprint, explicitly delineating the various phases and steps involved in the automated workflow.
 
-Below are the steps taking in deploying this project 
+Jenkinsfile
 
-Step 1: we cd into our vault initialize and then we apply 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/2089123b-5ba8-4150-b754-7d67a339e4b4)
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/53a21f69-491f-4216-a0ef-e957fc19c4a5)
-step 2 : ssh into your ubuntu server using your ip address that has been outputed 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/062b5cb9-1065-4b19-89e9-3b8ca2da49a5)
-step 3:initalize your vault server 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/12638f5a-79d5-43eb-98cf-394235afcc9b)
-step 4: copy the new token generated and edit it on your root provider.tf 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/6615d8fc-d3f8-4290-a09d-02a2acb69f59)
-step 5: log into your vault server using the token generated
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/61337616-2b6e-4710-98c2-e60e86e0cce3)
-step 6: enables the Key-Value (kv) secrets engine at the specified path (secret). 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/b98edf39-c9d2-47bd-98d2-b4459dacfaa6)
-step 7:sets the values for the keys username and password in the secret/database path in Vault
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/af302a83-a84b-4407-916f-4916ed0f8cc7)
-step 8: open a new terminal and initalize and apply your modules 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/e8f7fe64-56bd-4df5-b8cb-72bafef04b54)
-you will have all your outputs displayed in this format 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/fa6325af-7f89-4eb1-a66f-3562becc6c2c)
-step 9 :next you need to open a new terminal where you ssh into your bastion host to be able to access your jenkins because it has a private address 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/603b99d9-f81d-4b0a-9d1f-0da71d70cc41)
-step 10: now you can ssh into your jenkins 
-![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/5de242d8-7067-45a7-9738-1b9e46b8f5f0)
+The Jenkinsfile serves as a comprehensive blueprint, precisely defining each stage of the continuous integration/continuous delivery (CI/CD) pipeline. This file outlines the various phases and steps involved in the automated workflow, providing clarity and transparency.
+Deployment Steps
+
+Step 1: Vault Initialization and Application
+Navigate to the vault initialization directory and apply the necessary configurations.
+bash
+cd vault
+terraform init
+terraform apply
+
+Step 2: SSH into Ubuntu Server
+SSH into the Ubuntu server using the provided IP address.
+bash
+ssh ubuntu@<your-ip-address>
+
+Step 3: Initialize Vault Server
+Initialize the Vault server.
+bash
+vault operator init
+Step 4: Copy New Token
+Copy the newly generated token and edit the root provider.tf file.
+Step 5: Log into Vault Server
+Log into the Vault server using the generated token.
+bash
+Copy code
+vault login <your-generated-token>
+Step 6: Enable Key-Value (KV) Secrets Engine
+Enable the KV secrets engine at the specified path (secret).
+bash
+Copy code
+vault secrets enable -path=secret kv
+Step 7: Set Values in Vault
+Set values for the keys 'username' and 'password' in the 'secret/database' path in Vault.
+bash
+Copy code
+vault kv put secret/database username=admin password=admin123
+Step 8: Initialize and Apply Modules
+Open a new terminal and initialize and apply the Terraform modules.
+bash
+terraform init
+terraform apply
+Step 9: SSH into Bastion Host
+SSH into the Bastion host to access Jenkins.
+bash
+ssh ec2-user@<bastion-ip>
+Step 10: SSH into Jenkins
+bash 
+ssh ec2-user@<jenkins-ip>
 next we need to cat the part giving on out jenkins to be able to get our password 
 ![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/b739661e-2ff4-4734-9474-de07ee2c75aa)
 ![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/151ee478-9cdd-41e6-94c7-844427af7585)
@@ -56,6 +85,30 @@ step 15: on sonarqube create your webhook that will be used to connect to jenkin
 ![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/ff5360bd-81ff-4b17-86d4-1f9e77141d80)
 step 16: on nexus create your docker-repo where your docker image will be saved and also add your bearer 
 ![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/5c005c2b-9fa7-41b5-b152-2e31c1d4d559)
+step 17: add your system set up for sonarqube and attach your credentails 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/786d13e9-f177-48fd-8e6c-8323a1c3e8a8)
+step 18:generate your api token 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/8491a5e9-3648-40a7-8878-4455410cb266)
+Then attach that to your developers repo by creating a webhook on the developers repo 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/03108ace-9217-4854-8efd-dac58f97cce6)
+step 19: we can start building our pipeline 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/b6bd94dd-c2eb-44ec-b705-05954c6863f6)
+attach your deveolopers repo where you want jenkins to go and fetch your source code and attach your github credentials then apply save all information 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/e348861a-97db-4a37-949b-dca659ea268e)
+step 20: make sure your ansible ip is updated on your jenkinsfile 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/b662108e-296f-4473-9f77-406af0e5112f)
+and then you can click on build now and your pipline should start a build
+step 21: while the build is going on and the staging environment is completed you will be promted to approve to go to the production environment 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/f8d94a5b-f259-452a-b2fb-87767d15196e)
+when your pipline is completed you should have the above 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/7c7218d9-619a-4c55-b08e-ac13daa00af1)
+you have successfully deployed the application using jenkins pipeline!
+an example of our application running on the staging lb 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/205cc6a0-ada6-47e3-b4c0-d786d45f602c)
+an example of our application running on the production lb 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/c942dd7f-c1d9-4545-90bc-0d3d1d993232)
+And here is our vault server running on our domain name 
+![image](https://github.com/Sophia-Ikwuneme/Ansible-autodiscovery-project/assets/146546195/8ff7abe3-60ad-4e69-9137-e8e3ead8bc81)
 
 
 
